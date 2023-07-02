@@ -1,0 +1,82 @@
+
+animSpeed = 0.2s;
+
+.folder {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    // border-radius 0.5rem 0 0 0.5rem
+    cursor: pointer;
+    position: relative;
+    background-color: itemColor;
+    user-select: none;
+    transition: all animSpeed ease-in-out;
+    transition-delay: (animSpeed * 1.5);
+
+    &::before, &::after {
+        // inverted rounded corner
+        content: '';
+        position: absolute;
+        right: 0;
+        width: 0.7rem;
+        height: @width;
+        transition: transform animSpeed (animSpeed * 0.7) ease-in-out;
+    }
+
+    &::before {
+        background: radial-gradient(
+            100% 95% at 0% 0%,
+            transparent 99%,
+            darken(itemColor, 30%) 100%
+        );
+        top: 0;
+        transform: translateY(-50%) scaleY(0) translateY(-45%);
+    }
+
+    &::after {
+        background: radial-gradient(
+            100% 95% at 0% 100%,
+            transparent 99%,
+            darken(itemColor, 30%) 100%
+        );
+        bottom: 0;
+        transform: translateY(50%) scaleY(0) translateY(45%);
+    }
+
+    &.isOpen {
+        border-radius: 0.5rem 0 0 0.5rem;
+        transition-delay: 0s;
+        background-color: darken(itemColor, 30%);
+
+        &::before {
+            transform: translateY(-50%) scaleY(1) translateY(-45%);
+        }
+
+        &::after {
+            transform: translateY(50%) scaleY(1) translateY(45%);
+        }
+    }
+
+    &:hover {
+        // transition-delay: 0s
+        box-shadow: inset 100px 0px 33px -32px rgba(0, 0, 0, 0.1);
+    }
+}
+
+
+
+.file-list {
+    
+    background-color: darken(itemColor, 30%);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+}
+.folder-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+.folder-name {
+    font-size: 1.2rem;
+}
